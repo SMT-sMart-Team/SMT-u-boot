@@ -13,7 +13,7 @@ Embedded boards based on PowerPC, ARM, MIPS and several other
 processors, which can be installed in a boot ROM and used to
 initialize and test the hardware or to download and run application
 code.
-
+ 
 The development of U-Boot is closely related to Linux: some parts of
 the source code originate in the Linux source tree, we have some
 header files in common, and special provision has been made to

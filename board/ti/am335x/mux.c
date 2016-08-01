@@ -242,6 +242,13 @@ static struct module_pin_mux bbb_p9_15_pin_mux[] = {
 	{OFFSET(gpmc_csn3), (MODE(3) | RXACTIVE | PULLUP_EN)},
 	{-1},
 };
+#ifdef ALARM_P8_36
+static struct module_pin_mux bbb_p8_36_pin_mux[] = {
+	/* P8.36 shared pin */
+	{	0x8C8, (MODE(7) | PULLDOWN_EN)},
+	{	-1},
+};
+#endif
 
 #if defined(CONFIG_NOR_BOOT)
 void enable_norboot_pin_mux(void)
@@ -321,6 +328,9 @@ static unsigned short detect_daughter_board_profile(void)
 
 void enable_board_pin_mux(struct am335x_baseboard_id *header)
 {
+#ifdef ALARM_P8_36
+	configure_module_pin_mux(bbb_p8_36_pin_mux);
+#endif
 	/* Do board-specific muxes. */
 	if (board_is_bone(header)) {
 		/* Beaglebone pinmux */

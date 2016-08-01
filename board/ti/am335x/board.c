@@ -371,6 +371,7 @@ const struct dpll_params *get_dpll_ddr_params(void)
 
 	enable_i2c0_pin_mux();
 	i2c_init(CONFIG_SYS_OMAP24_I2C_SPEED, CONFIG_SYS_OMAP24_I2C_SLAVE);
+	i2c_set_bus_num(2);
 	if (read_eeprom(&header) < 0)
 		puts("Could not get board ID.\n");
 
@@ -542,6 +543,13 @@ int board_late_init(void)
 		setenv("board_rev", safe_string);
 	}
 #endif
+
+#ifdef ALARM_P8_36
+	gpio_request(GPIO_P8_36, "alarm");
+	gpio_direction_output(GPIO_P8_36, 1);
+#endif
+
+	i2c_set_bus_num(2);
 
 	return 0;
 }
